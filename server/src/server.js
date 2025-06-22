@@ -24,7 +24,7 @@ if(process.env.NODE_ENV !== "Production") {
   app.use(cors({ origin: 'http://localhost:5173' }))
 }
 
-console.log("node:", process.env.NODE_ENV)
+// console.log("node:", process.env.NODE_ENV)
 
 app.use("/auth", authRouter)
 app.use("/weather", weatherRouter)

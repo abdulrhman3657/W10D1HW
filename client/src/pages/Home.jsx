@@ -8,7 +8,7 @@ function Home() {
 
     const PATH = import.meta.env.VITE_NODE_ENV === "Development" ? "http://localhost:3000/" : "/" // or '/api'
 
-    console.log("react:", import.meta.env.VITE_NODE_ENV)
+    // console.log("react:", import.meta.env.VITE_NODE_ENV)
     
     const submitInput = () => {
         axios.get(`${PATH}weather?lat=${lat}&lon=${lon}`).then((res) => {
@@ -21,7 +21,7 @@ function Home() {
 
 
   return (
-    <div className='w-screen h-screen bg-gray-900'>
+    <div className='bg-gray-900'>
         <div className='p-5'>    
             <div className="border rounded-xl p-5 bg-white">
                 <div className="mb-6">
@@ -36,15 +36,17 @@ function Home() {
             </div>
         </div>
 
-        <div className="bg-white p-5 flex flex-col">
-            <div>lat = 24.71 lon = 46.60</div>
-            <div><span>source: </span><span>{data?.source}</span></div>
-            <div className="flex gap-3"><span>coordinates: </span><span>lat: {data?.coordinates?.lat}</span><span>lon: {data?.coordinates?.lon}</span></div>
-            <div><span>temp: </span><span>{data?.tempC}</span></div>
-            <div><span>humidity: </span><span>{data?.humidity}</span></div>
-            <div><span>description: </span><span>{data?.description}</span></div>
-            <div><span>fetchedAt: </span><span>{data?.fetchedAt}</span></div>
+    <div className="flex justify-center">
+        <div className="bg-white p-5 flex flex-col gap-5 w-8/10 rounded-xl mb-3">
+            <div className="border p-3 rounded-xl"> test: lat = 24.71 lon = 46.60</div>
+            <div className="flex items-center gap-4"><span className="font-bold">source: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.source}</span></div>
+            <div className="flex items-center gap-4"><span className="font-bold">coordinates: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">lat: {data?.coordinates?.lat}</span><span className="border px-3 py-2 rounded-xl text-white bg-black">lon: {data?.coordinates?.lon}</span></div>
+            <div className="flex items-center gap-4"><span className="font-bold">temp: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.tempC}</span></div>
+            <div className="flex items-center gap-4"><span className="font-bold">humidity: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.humidity}</span></div>
+            <div className="flex items-center gap-4"><span className="font-bold">description: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.description}</span></div>
+            <div className="flex items-center gap-4"><span className="font-bold">fetchedAt: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.fetchedAt}</span></div>
         </div>
+    </div>
 
 
     </div>

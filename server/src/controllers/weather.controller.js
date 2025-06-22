@@ -7,8 +7,6 @@ export const getWeather = async (req, res) => {
 
         const user = req.user
 
-        // console.log(user.email)
-
         const { lat, lon } = req.query
 
         const API_KEY = "63da34eb511e418be469e9f5a30012f3"
@@ -40,19 +38,17 @@ export const getWeather = async (req, res) => {
         // check if the weather is aleardy stored
         const checWeather = await Weather.findOne({ lat:lat, lon:lon });
 
-        console.log(checWeather)
-
         if (checWeather) {
 
-            // const history = new History({
-            //     user: user._id,
-            //     weather: checWeather._id,
-            //     lat: weatherAPI.coord.lat,
-            //     lon: weatherAPI.coord.lon,
-            //     requestedAt: new Date()
-            // })
+            const history = new History({
+                user: user._id,
+                weather: checWeather._id,
+                lat: weatherAPI.coord.lat,
+                lon: weatherAPI.coord.lon,
+                requestedAt: new Date()
+            })
 
-            // await history.save();
+            await history.save();
 
             // elapsed time in minutes
             const elapsedTime = ( new Date() - checWeather.fetchedAt ) / (1000 * 60)
@@ -71,22 +67,23 @@ export const getWeather = async (req, res) => {
             }
         }
 
-        // const storeWeather = new Weather({
-        //       lat: weatherAPI.coord.lat,
-        //       lon: weatherAPI.coord.lon,
-        //       data: cachedWeather,
-        //       fetchedAt: new Date(),
-        // })
-        // await storeWeather.save();
+        const storeWeather = new Weather({
+              lat: weatherAPI.coord.lat,
+              lon: weatherAPI.coord.lon,
+              data: cachedWeather,
+              fetchedAt: new Date(),
+        })
+        await storeWeather.save();
 
-        // const history = new History({
-        //     user: user._id,
-        //     weather: storeWeather._id,
-        //     lat: weatherAPI.coord.lat,
-        //     lon: weatherAPI.coord.lon,
-        //     requestedAt: new Date()
-        // })
-        // await history.save();
+        const history = new History({
+            user: user._id,
+            weather: storeWeather._id,
+            lat: weatherAPI.coord.lat,
+            lon: weatherAPI.coord.lon,
+            requestedAt: new Date()
+        })
+        
+        await history.save();
 
         // return the api weather
         res.status(200).json(openWeather)
