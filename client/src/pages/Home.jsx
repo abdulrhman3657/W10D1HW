@@ -8,7 +8,7 @@ function Home() {
 
     const PATH = import.meta.env.VITE_NODE_ENV === "Development" ? "http://localhost:3000/" : "/" // or '/api'
 
-    console.log(import.meta.env.VITE_NODE_ENV)
+    console.log("react:", import.meta.env.VITE_NODE_ENV)
     
     const submitInput = () => {
         axios.get(`${PATH}weather?lat=${lat}&lon=${lon}`).then((res) => {
