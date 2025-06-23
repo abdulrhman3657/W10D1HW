@@ -1,29 +1,56 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function Navbar() {
   const [toggleMenue, setToggleMenue] = useState(false);
 
-  let username = localStorage.getItem("username");
+  let email = localStorage.getItem("email");
 
   const {pathname} = useLocation()
   
   const navigate = useNavigate()
 
   const Signout = () => {
-    localStorage.removeItem("username");
-    navigate("/login")
+
+    const PATH = import.meta.env.VITE_NODE_ENV === "Development" ? "http://localhost:3000/auth/signout" : "/auth/signout"
+
+    // post user data
+    axios.post(PATH).then((res) => {
+
+        console.log(res.data);
+
+        document.cookie = `accessToken=`;
+        document.cookie = `refreshToken=`;
+
+        localStorage.setItem("email", "")
+
+        toast.success("signed out successfully");
+
+        // setTimeout(() => {
+        //   redirect();
+        // }, 1000);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+    localStorage.removeItem("email");
+    navigate("/")
   };
 
   useEffect(() => {
-    username = localStorage.getItem("username");
+    email = localStorage.getItem("email");
   }, [pathname])
 
   return (
     <div>
       <nav className="bg-white border-gray-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link to={username == "admin" ? "/adminpage" : "/"} className="flex items-center gap-3">
+          <Link to={email == "admin" ? "/adminpage" : "/"} className="flex items-center gap-3">
             <img
               src="https://www.pngplay.com/wp-content/uploads/9/Website-Logo-Background-PNG-Image.png"
               className="h-10 w-10"
@@ -67,7 +94,7 @@ function Navbar() {
             id="navbar-default"
           >
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border gap-3 lg:gap-0 border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
-              {username ? (
+              {email ? (
                 <li
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
                   onClick={Signout}

@@ -2,6 +2,10 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 
 function Home() {
+
+
+    const email = localStorage.getItem("email")
+
     const [lat, setLat] = useState(0);
     const [lon, setLon] = useState(0);
     const [data, setData] = useState({})
@@ -19,7 +23,7 @@ function Home() {
 
 
   return (
-    <div className='bg-gray-900'>
+    email ?     <div className='bg-gray-900'>
         <div className='p-5'>    
             <div className="border rounded-xl p-5 bg-white">
                 <div className="mb-6">
@@ -47,6 +51,8 @@ function Home() {
     </div>
 
 
+    </div> : <div className="p-5 flex justify-center">
+        <h1 className="text-3xl font-bold pt-10">You must log in to see this page</h1>
     </div>
   )
 }

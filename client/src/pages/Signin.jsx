@@ -62,7 +62,9 @@ function Signin() {
         document.cookie = `accessToken=${res.data.data.accessToken}`;
         document.cookie = `refreshToken=${res.data.data.refreshToken}`;
 
-        toast.success("signed up successfull");
+        localStorage.setItem("email", email)
+
+        toast.success("signed up successfully");
 
         setTimeout(() => {
           redirect();
