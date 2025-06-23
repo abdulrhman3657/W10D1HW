@@ -7,6 +7,8 @@ export const getWeather = async (req, res) => {
 
         const user = req.user
 
+        console.log(user.email)
+
         const { lat, lon } = req.query
 
         const API_KEY = "63da34eb511e418be469e9f5a30012f3"

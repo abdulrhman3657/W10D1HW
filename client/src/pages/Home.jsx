@@ -6,12 +6,18 @@ function Home() {
     const [lon, setLon] = useState(0);
     const [data, setData] = useState({})
 
-    const PATH = import.meta.env.VITE_NODE_ENV === "Development" ? "http://localhost:3000/" : "/" // or '/api'
+    const PATH = import.meta.env.VITE_NODE_ENV === "Development" ? "http://localhost:3000/" : "/"
 
-    // console.log("react:", import.meta.env.VITE_NODE_ENV)
+    const API = import.meta.env.VITE_NODE_ENV === "Development" ? "http://localhost:3000/auth/signin" : "/auth/signin"
+
+    // useEffect(() => {
+    //     axios.post(API).then(() => {
+            
+    //     })
+    // }, [])
     
     const submitInput = () => {
-        axios.get(`${PATH}weather?lat=${lat}&lon=${lon}`).then((res) => {
+        axios.get(`${PATH}weather?lat=${lat}&lon=${lon}`, { withCredentials: true }).then((res) => {
             console.log(res.data)
             setData(res.data)
         }).catch(error => {

@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 if(process.env.NODE_ENV !== "Production") {
-  app.use(cors({ origin: 'http://localhost:5173' }))
+  app.use(cors({ credentials: true, origin: 'http://localhost:5173' }))
 }
 
 // console.log("node:", process.env.NODE_ENV)

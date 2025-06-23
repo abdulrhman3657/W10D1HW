@@ -5,7 +5,6 @@ import { protectRoute } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 // /?lat=24.71&lon=46.68
-// router.get("/", protectRoute, getWeather)
-router.get("/", getWeather)
+router.get("/", protectRoute, getWeather)
 
 export default router;
