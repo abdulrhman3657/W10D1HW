@@ -23,7 +23,7 @@ function Home() {
 
 
   return (
-    email ?     <div className='bg-gray-900'>
+    email ? <div className='bg-gray-900'>
         <div className='p-5'>    
             <div className="border rounded-xl p-5 bg-white">
                 <div className="mb-6">
@@ -41,12 +41,12 @@ function Home() {
     <div className="flex justify-center">
         <div className="bg-white p-5 flex flex-col gap-5 w-8/10 rounded-xl mb-3">
             <div className="border p-3 rounded-xl"> test: lat = 24.71 lon = 46.60</div>
-            <div className="flex items-center gap-4"><span className="font-bold">source: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.source}</span></div>
-            <div className="flex items-center gap-4"><span className="font-bold">coordinates: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">lat: {data?.coordinates?.lat}</span><span className="border px-3 py-2 rounded-xl text-white bg-black">lon: {data?.coordinates?.lon}</span></div>
-            <div className="flex items-center gap-4"><span className="font-bold">temp: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.tempC}</span></div>
-            <div className="flex items-center gap-4"><span className="font-bold">humidity: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.humidity}</span></div>
-            <div className="flex items-center gap-4"><span className="font-bold">description: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.description}</span></div>
-            <div className="flex items-center gap-4"><span className="font-bold">fetchedAt: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.fetchedAt}</span></div>
+            <div className="flex items-center gap-4"><span className="font-bold">source: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.source ? data?.source : <span>cach or openweather</span>}</span></div>
+            <div className="flex items-center gap-4"><span className="font-bold">coordinates: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">lat: {data?.coordinates?.lat ? data?.coordinates?.lat : 0}</span><span className="border px-3 py-2 rounded-xl text-white bg-black">lon: {data?.coordinates?.lon ? data?.coordinates?.lon : 0}</span></div>
+            <div className="flex items-center gap-4"><span className="font-bold">temperature: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.tempC ? data?.tempC : 0}°</span></div>
+            <div className="flex items-center gap-4"><span className="font-bold">humidity: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.humidity ? data?.humidity : 0}</span></div>
+            <div className="flex items-center gap-4"><span className="font-bold">description: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.description ? data?.description : <span>clear sky, broken clouds, rain, ...</span>}</span></div>
+            <div className="flex items-center gap-4"><span className="font-bold">fetchedAt: </span><span className="border px-3 py-2 rounded-xl text-white bg-black">{data?.fetchedAt ? data?.fetchedAt : <span>data date</span>}</span></div>
         </div>
     </div>
 
