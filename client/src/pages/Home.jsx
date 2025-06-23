@@ -7,14 +7,6 @@ function Home() {
     const [data, setData] = useState({})
 
     const PATH = import.meta.env.VITE_NODE_ENV === "Development" ? "http://localhost:3000/" : "/"
-
-    const API = import.meta.env.VITE_NODE_ENV === "Development" ? "http://localhost:3000/auth/signin" : "/auth/signin"
-
-    // useEffect(() => {
-    //     axios.post(API).then(() => {
-            
-    //     })
-    // }, [])
     
     const submitInput = () => {
         axios.get(`${PATH}weather?lat=${lat}&lon=${lon}`, { withCredentials: true }).then((res) => {

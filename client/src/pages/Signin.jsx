@@ -7,17 +7,10 @@ function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const API = "https://682199fa259dad2655afc100.mockapi.io/usersapi";
-
   const navigate = useNavigate();
 
   const redirect = () => {
     navigate("/");
-  };
-
-  const empty_input = () => {
-    setEmail("");
-    setPassword("");
   };
 
   const validate_data = () => {
@@ -39,16 +32,6 @@ function Signin() {
       return false;
     }
 
-    const custom_validate_email = (email) => {
-      const domain = email.slice(email.indexOf("@") + 1, email.indexOf("."));
-      return domain == "tuwaiq";
-    };
-
-    if (!custom_validate_email(email)) {
-      toast.error("email domain name must be tuwaiq");
-      return false;
-    }
-
     return true;
   };
 
@@ -58,31 +41,37 @@ function Signin() {
       return;
     }
 
-    // axios.get(API).then((res) => {
-    //   // check if user exits
-    //   const check_user = res.data.find((user) => {
-    //     return user.email == email;
-    //   });
+    const PATH = import.meta.env.VITE_NODE_ENV === "Development" ? "http://localhost:3000/auth/signin" : "/auth/signin"
 
-    //   if (!check_user) {
-    //     toast.error("user does not exists");
-    //     return;
-    //   }
+    // post user data
+    axios
+      .post(PATH, {
+        email: email,
+        password: password,
+      })
+      .then((res) => {
 
-    //   toast.success("signed in successfully")
+        console.log(res.data);
 
-    //   localStorage.setItem("username", check_user.username)
-    //   localStorage.setItem("userType", check_user.type)
-    //   localStorage.setItem("id", check_user.id)
+        // accessToken
+        // res.data.data.accessToken
 
+        // refreshToken
+        // res.data.data.refreshToken
 
-    //   setTimeout(() => {
-    //     redirect();
-    //   }, 1000);
+        document.cookie = `accessToken=${res.data.data.accessToken}`;
+        document.cookie = `refreshToken=${res.data.data.refreshToken}`;
 
-    //   console.log(check_user)
+        toast.success("signed up successfull");
 
-    // });
+        setTimeout(() => {
+          redirect();
+        }, 1000);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
   };
 

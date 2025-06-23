@@ -6,8 +6,6 @@ import { toast, ToastContainer } from "react-toastify";
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [accessToken, setAccessToken] = useState("")
-  const [refreshToken, setRefreshToken] = useState("")
 
   const navigate = useNavigate();
 
@@ -61,12 +59,10 @@ function Signup() {
         console.log(res.data);
 
         // accessToken
-        setAccessToken(res.data.data.accessToken)
+        // res.data.data.accessToken
 
         // refreshToken
-        setRefreshToken(res.data.data.refreshToken)
-
-        console.log(res.data.data.accessToken)
+        // res.data.data.refreshToken
 
         document.cookie = `accessToken=${res.data.data.accessToken}`;
         document.cookie = `refreshToken=${res.data.data.refreshToken}`;
